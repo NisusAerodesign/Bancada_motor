@@ -189,8 +189,7 @@ void setup_sd(){
 
     uint64_t cardSize = SD.cardSize() / (1024 * 1024);
     digitalWrite(12, HIGH);
-    writeFile(SD, "/DataLogger.txt", "torque |  empuxo |  comando  |  tesao  |  corrente |  potencia  | sgundos\n");
-    appendFile(SD, "/DataLogger.txt", "N*mm |  N |  %  | V |  A |  W |  s\n");
+    writeFile(SD, "/DataLogger.txt", "Torque(N*mm) |  Empuxo(N) |  Comando(%)  |  Tensao(V)  |  Corrente(A) |  Potencia(W)  | Sgundos(s)\n");
     
 }
 
