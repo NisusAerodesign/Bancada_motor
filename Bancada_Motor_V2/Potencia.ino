@@ -32,7 +32,8 @@ void loop_Power() {
   c4 = c3;
   c3 = c2;
   c2 = c1;
-  c1 = ((0.0806521713731583 * analogRead(VIN)) - 150.8092600507063);//this equations was set to 3.3v and 50B sensor
+  //c1 = ((0.0806521713731583 * analogRead(VIN)) - 150.8092600507063);//this equations was set to 3.3v and 50B sensor
+  c1 = ((0.4453612903225806 * analogRead(VIN)) - 228.768734); //this equation was set to 3.3v and 100B sensor
   corrente = abs((c1 +  c2 + c3 + c4 + c5 + c6 + c7 + c8 + c9 + c10 + c11 + c12 + c13 + c14 + c15)/15); //mesuremants linearization 
   power = volt * corrente;
 
