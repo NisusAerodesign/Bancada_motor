@@ -1,5 +1,5 @@
 #define Periodo 16000             // define o periodo em 16 mili segundos para ler o pwm
-
+//PLEASE! REMEMBER TO CHECK THE CALIBRATION OF THE SENSORS
 void setup(){
   Serial.begin(115200);
   setup_sd();
@@ -7,7 +7,7 @@ void setup(){
   setup_LoadCell();
   setup_rpm();
   Serial.println("torque   empuxo   comando  RPM  tensao    corrente   potencia");
-  Serial.println("Did you checked the load cells calibration??");
+  Serial.println("Did you checked calibration??");
 }
 
 void loop(){
