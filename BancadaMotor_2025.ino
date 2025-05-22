@@ -27,6 +27,9 @@
 #define Pmin -1.0
 #define Pmax 1.0
 
+// SD read LED
+#define ledPin PC13
+
 const float f_tracao = 432.1623978897209;
 const float f_torq1 = 1015.5633090614887;
 const float f_torq2 = 904.7828247803975;
@@ -64,13 +67,14 @@ void startSD(){
 
 void printlnSD(String text, String file){
   File myFile = SD.open(file, FILE_WRITE); // FILE_READ for reading
-
+  digitalWrite(ledPin, HIGH); // turn on the led
   if (myFile) {
     myFile.println(text);
     myFile.close();
   } else {
     Serial.println("Error opening file.");
   }
+  digitalWrite(ledPin, LOW); // turn off the led
 }
 // --- SD functions end ---
 
@@ -110,6 +114,8 @@ void pitot(float * p,float * t){
 
 void setup() {
   //pin definitions
+  pinMode(ledPin, OUTPUT); 
+  digitalWrite(ledPin, LOW); //LED starts "off"
   afio_cfg_debug_ports(AFIO_DEBUG_SW_ONLY);
   pinMode(DT1, INPUT_PULLDOWN);
   pinMode(DT2, INPUT_PULLDOWN);
