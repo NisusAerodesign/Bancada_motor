@@ -34,8 +34,8 @@ const float f_tracao = 432.1623978897209;
 const float f_torq1 = 1015.5633090614887;
 const float f_torq2 = 904.7828247803975;
 const float f_volt = 167.80371035308198;
-const float f_amp = 1;
-const float f2_amp = 895;
+const float f_amp = 14.615;
+const float f2_amp = 1898;
 String fileName = "data.txt";
 float pressure;
 float temperature;
@@ -67,14 +67,14 @@ void startSD(){
 
 void printlnSD(String text, String file){
   File myFile = SD.open(file, FILE_WRITE); // FILE_READ for reading
-  digitalWrite(ledPin, HIGH); // turn on the led
   if (myFile) {
+    digitalWrite(ledPin, LOW); // Turn on the led
     myFile.println(text);
     myFile.close();
   } else {
     Serial.println("Error opening file.");
   }
-  digitalWrite(ledPin, LOW); // turn off the led
+  digitalWrite(ledPin, HIGH); // Turn off the led
 }
 // --- SD functions end ---
 
@@ -115,7 +115,7 @@ void pitot(float * p,float * t){
 void setup() {
   //pin definitions
   pinMode(ledPin, OUTPUT); 
-  digitalWrite(ledPin, LOW); //LED starts "off"
+  digitalWrite(ledPin, HIGH); //LED starts off. Note: PC13 has inverted logic.
   afio_cfg_debug_ports(AFIO_DEBUG_SW_ONLY);
   pinMode(DT1, INPUT_PULLDOWN);
   pinMode(DT2, INPUT_PULLDOWN);
@@ -147,7 +147,6 @@ void setup() {
 void loop() {
   pitot(&pressure, &temperature);
   String dataLine = String(tracao(), 2) + " | " + String(torque(), 2) + " | " + String(tensao(), 2) + " | " + String(corrente(), 2) + " | " + String(pressure, 2) + " | " + String(temperature, 2);
-  //String dataLine = String(0.00, 2) + " | " + String(0.00, 2) + " | " + String(tensao(), 2) + " | " + String(corrente(), 2);
   Serial.println(dataLine);
   printlnSD(dataLine, fileName);
 }
